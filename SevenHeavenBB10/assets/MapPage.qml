@@ -5,7 +5,15 @@ Page {
     titleBar: TitleBar {
         id: mapTitleBar
     }
-    Container {
-        // define tab content here
+    ScrollView {
+        scrollViewProperties.scrollMode: ScrollMode.Both
+        scrollViewProperties.pinchToZoomEnabled: true
+        Container {
+            WebView {
+                id: mapWebView
+                url: "http://eco-bodhi.herokuapp.com"
+                settings.zoomToFitEnabled: true
+            }
+        }
     }
 }
