@@ -19,64 +19,26 @@ TabbedPane {
     }
     Tab {
         title: qsTr("Home")
-        Page {
-            id: tab1
-            Container {
-                // define tab content here
-                Label {
-                    text: qsTr("Home")
-                    horizontalAlignment: HorizontalAlignment.Center
-                    textStyle {
-                        base: SystemDefaults.TextStyles.TitleText
-                    }
-                }
-            }
+        HomePage {
+            title: qsTr("Home")
         }
     }
     Tab {
         title: qsTr("Interactive Map")
-        Page {
-            id: tab2
-            Container {
-                // define tab content here
-                Label {
-                    text: qsTr("Interactive Map")
-                    horizontalAlignment: HorizontalAlignment.Center
-                    textStyle {
-                        base: SystemDefaults.TextStyles.TitleText
-                    }
-                }
-            }
+        MapPage {
+            title: qsTr("Interactive Map")
         }
     }
     Tab {
         title: qsTr("Top Countries")
-        Page {
-            id: tab3
-            Container {
-                // define tab content here
-                Label {
-                    text: qsTr("Top Countries")
-                    horizontalAlignment: HorizontalAlignment.Center
-                    textStyle {
-                        base: SystemDefaults.TextStyles.TitleText
-                    }
-                }
-            }
+        TopCountriesPage {
+            title: qsTr("Top Countries")
         }
     }
     Tab {
         title: qsTr("Eco Facts")
-        Page {
-            Container {
-                Label {
-                    text: qsTr("Eco Facts")
-                    horizontalAlignment: HorizontalAlignment.Center
-                    textStyle {
-                        base: SystemDefaults.TextStyles.TitleText
-                    }
-                }
-            }
+        EcoFactsPage {
+            title: qsTr("Eco Facts")
         }
     }
     onCreationCompleted: {
