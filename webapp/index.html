@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>World Map</title>
+  <link rel="stylesheet" href="jvectormap/jquery-jvectormap-1.2.2.css" type="text/css" media="screen"/>
+  <script src="jquery/jquery-1.9.0.min.js"></script>
+  <script src="jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+  <script src="jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+</head>
+<body>
+  <div id="world-map" style="width: 600px; height: 400px"></div>
+  <script>
+    $(function(){
+      var gdpData = {
+            "HU": 132.04,
+            "DE": 3300.54,
+            "RU": 1456.87,
+            "US": 14511.05,
+            "AF": 16.63,
+            "AL": 11.58,
+            "DZ": 158.97
+      };
+      map = new jvm.WorldMap({
+          container: $('#world-map'),
+          map: 'world_mill_en',
+          series: {
+              regions: [{
+                  values: gdpData,
+                  scale: ['#C8EEFF', '#0071A4'],
+                  normalizeFunction: 'polynomial'
+              }]
+          },
+          onRegionLabelShow: function(e, el, code){
+              el.html(el.html()+' (GDP - '+gdpData[code]+')');
+          },
+
+          onRegionClick: function(event, code) {
+              console.log(' Clicked on country: '+code);
+              //map.setFocus(code, 1, 1);
+          }
+      });
+
+      map.container.click(function(e){
+          var latLng = map.pointToLatLng(e.offsetX, e.offsetY),
+          targetCls = $(e.target).attr('class');
+
+          if (latLng && (!targetCls || (targetCls && $(e.target).attr('class').indexOf('jvectormap-marker') === -1))) {
+              console.log(' Clicked at lat: '+latLng.lat+ ' long: '+latLng.lng);
+          }
+      });
+
+    });
+  </script>
+</body>
+</html>
