@@ -1,6 +1,7 @@
 APP_NAME = SevenHeavenBB10
 
 CONFIG += qt warn_on cascades10
+LIBS += -lbbdata -lbb
 
 include(config.pri)
 
