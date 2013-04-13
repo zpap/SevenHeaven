@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d8bc612f-8fff-4006-8c6b-8392755d2607" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-    </list>
+    <list default="true" id="d8bc612f-8fff-4006-8c6b-8392755d2607" name="Default" comment="" />
     <ignored path="webservice.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="d8bc612f-8fff-4006-8c6b-8392755d2607" time="1365879200443" ignored="false" />

@@ -5,19 +5,12 @@
 
 #define TAG "SettingsManager: "
 
-static const QString ORGANIZATION = "BROCKOLI";
-static const QString APPLICATION_NAME = "MEDIAJERK";
+static const QString ORGANIZATION = "MACADAMIAN";
+static const QString APPLICATION_NAME = "ECO_BOHDI";
 
-const QString SettingsManager::DATA_DIR = "/shows/";
-const QString SettingsManager::SHOW_DETAILS_DIR = "details/";
-const QString SettingsManager::FILE_SHOWS = "shows.json";
-const QString SettingsManager::FILE_HISTORY = "history.json";
-const QString SettingsManager::FILE_FUTURE = "future.json";
-const QString SettingsManager::FILE_PONG = "pong.json";
+const QString SettingsManager::DATA_DIR = "/feeds/";
 
-const QString SettingsManager::SICKBEARD_URL = "SICKBEARD_URL";
-const QString SettingsManager::SICKBEARD_API_KEY = "SICKBEARD_API_KEY";
-const QString SettingsManager::SICKBEARD_PORT = "SICKBEARD_PORT";
+const QString SettingsManager::FEED_URL = "FEED_URL";
 
 SettingsManager::SettingsManager()
 {
@@ -61,16 +54,4 @@ void SettingsManager::updateSettingValue(const QString &strSettingName, const QS
 	QSettings settings(ORGANIZATION, APPLICATION_NAME);
 	settings.setValue(strSettingName, QVariant(value));
 	settings.sync();
-}
-
-bool SettingsManager::validSettings()
-{
-	QSettings registrationSettings(ORGANIZATION, APPLICATION_NAME);
-
-	if (registrationSettings.contains(SICKBEARD_URL) && registrationSettings.contains(SICKBEARD_PORT) &&
-			registrationSettings.contains(SICKBEARD_API_KEY)) {
-		return true;
-	}
-
-	return false;
 }

@@ -18,17 +18,17 @@ class RESTClient : public QObject
 {
 	Q_OBJECT
 public:
-	static const QString CMD;
-	static const QString CMD_SHOWS;
-	static const QString CMD_SHOW;
-	static const QString CMD_HISTORY;
-	static const QString CMD_FUTURE;
-	static const QString CMD_PING;
-	static const QString CMD_GET_BANNER;
-	static const QString CMD_GET_POSTER;
-	static const QString QUERY_TVDBID;
+	static const QString DATA_DIR;
 
-	static const QString PATH_API;
+	static const QString BASE_URL;
+
+	static const QString CMD_FACTS;
+	static const QString CMD_TIPS;
+	static const QString CMD_CARBON_FOOTPRINTS;
+
+	static const QString FILENAME_FACTS;
+	static const QString FILENAME_TIPS;
+	static const QString FILENAME_CARBON_FOOTPRINTS;
 
 	RESTClient();
 	virtual ~RESTClient();
@@ -37,27 +37,25 @@ public:
 	static RESTClient& instance();
 
 	// for GET
-	QUrl buildUri(const QList<QPair<QString, QString> > query);
+	QUrl buildUri(const QString& path);
 
 public Q_SLOTS:
 
-	void fetchData(const QString& cmd, const QList<QPair<QString, QString> >* data = 0);
-	void testUrl(const QString& url);
+	void fetchData(const QString& cmd);
 
 Q_SIGNALS:
 
 	void downloadComplete(const QString& cmd);
-	void pong(const QString& result);
 
 private:
 
 	QNetworkAccessManager *mNetworkManager;
 
 	// Extract the file name from the download url
-	QString buildFilename(const QString& cmd, const QString& tvdbid = 0);
+	QString buildFilename(const QString& cmd);
 
 	// Get a filename from the request url
-	QString getFilename(const QUrl& url, const QString& tvdbid = 0);
+	QString getFilename(const QUrl& url);
 
 	// Get the REST command from the request url
 	QString getCmd(const QUrl& url);

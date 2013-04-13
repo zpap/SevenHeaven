@@ -1,5 +1,6 @@
 // Tabbed Pane project template
 import bb.cascades 1.0
+import "home"
 
 TabbedPane {
     Menu.definition: MenuDefinition {

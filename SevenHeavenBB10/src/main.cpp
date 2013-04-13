@@ -1,5 +1,5 @@
 // Tabbed pane project template
-#include "applicationui.hpp"
+#include "EcoBodhi.hpp"
 
 #include <bb/cascades/Application>
 
@@ -26,7 +26,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     }
 
     // create the application pane object to init UI etc.
-    new ApplicationUI(&app);
+    new EcoBodhi(&app);
 
     // we complete the transaction started in the app constructor and start the client event loop here
     return Application::exec();
