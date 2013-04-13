@@ -1,5 +1,4 @@
 #include "RESTClient.hpp"
-#include "SettingsManager.hpp"
 
 #include <bb/data/JsonDataAccess>
 
@@ -131,7 +130,7 @@ void RESTClient::slotRequestFinished(QNetworkReply* reply) {
 		QString filename = getFilename(url);
 		qDebug() << TAG << "SET FILENAME: " << filename;
 
-		QFile file(QDir::homePath() + SettingsManager::DATA_DIR + filename);
+		QFile file(QDir::homePath() + DATA_DIR + filename);
 		qDebug() << TAG << file.fileName();
 		if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		{
