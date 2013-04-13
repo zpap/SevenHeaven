@@ -24,17 +24,14 @@ using namespace bb::data;
  */
 int QNETWORKREPLY_ERROR_LAYER_5_THRESHOLD = 100;
 
-const QString RESTClient::CMD = "cmd";
-const QString RESTClient::CMD_SHOWS = "shows";
-const QString RESTClient::CMD_SHOW = "show";
-const QString RESTClient::CMD_HISTORY = "history";
-const QString RESTClient::CMD_FUTURE = "future";
-const QString RESTClient::CMD_PING = "sb.ping";
-const QString RESTClient::CMD_GET_BANNER = "show.getbanner";
-const QString RESTClient::CMD_GET_POSTER = "show.getposter";
-const QString RESTClient::QUERY_TVDBID = "tvdbid";
-
-const QString RESTClient::PATH_API = "api/";
+const QString RESTClient::DATA_DIR 						= "/feeds/";
+const QString RESTClient::BASE_URL 						= "http://eco-bodhi.herokuapp.com";
+const QString RESTClient::CMD_FACTS 					= "/facts";
+const QString RESTClient::CMD_TIPS 						= "/tips";
+const QString RESTClient::CMD_CARBON_FOOTPRINTS 		= "/carbonFootprints";
+const QString RESTClient::FILENAME_FACTS 				= "facts.json";
+const QString RESTClient::FILENAME_TIPS 				= "tips.json";
+const QString RESTClient::FILENAME_CARBON_FOOTPRINTS 	= "carbon-footprints.json";
 
 /* Constructor */
 RESTClient::RESTClient()
@@ -43,7 +40,7 @@ RESTClient::RESTClient()
 	qDebug() << TAG << "created!";
 
 	// Create data/shows if it doesn't exist
-	QDir dataDir(QDir::homePath() + SettingsManager::DATA_DIR);
+	QDir dataDir(QDir::homePath() + DATA_DIR);
 	if (!dataDir.exists()) {
 		qDebug() << TAG << "Created directory: " << dataDir.absolutePath();
 		dataDir.mkpath(dataDir.absolutePath());
@@ -57,19 +54,17 @@ RESTClient::~RESTClient()
 	delete mNetworkManager;
 }
 
-QUrl RESTClient::buildUri(const QList<QPair<QString, QString> > query) {
+QUrl RESTClient::buildUri(const QString& path) {
 	QUrl result;
-	result.setUrl(SettingsManager::instance().getSettingValue(SettingsManager::SICKBEARD_URL, ""));
-    result.setPort(SettingsManager::instance().getSettingValue(SettingsManager::SICKBEARD_PORT, "").toInt());
-    result.setPath(PATH_API + SettingsManager::instance().getSettingValue(SettingsManager::SICKBEARD_API_KEY, "") + "/");
-    result.setQueryItems(query);
+	result.setUrl(BASE_URL);
+	result.setPath(path);
 
 	qDebug() << "Build URI" << result;
 	return result;
 }
 
 /*
- * As this is single tone class, this function creates (if needed)
+ * As this is singleton class, this function creates (if needed)
  * and returns class intance
  * */
 RESTClient& RESTClient::instance()
@@ -78,29 +73,10 @@ RESTClient& RESTClient::instance()
     return client;
 }
 
-void RESTClient::testUrl(const QString& url) {
-	qDebug() << TAG << "Testing url: " << url;
-
-	if (mNetworkManager == 0) {
-		// Create it once
-		mNetworkManager = new QNetworkAccessManager(this);
-		Q_ASSERT(mNetworkManager != NULL);
-		bool connectResult = QObject::connect(mNetworkManager, SIGNAL(finished(QNetworkReply *)),
-								  SLOT(slotRequestFinished(QNetworkReply *)), Qt::DirectConnection);
-		Q_ASSERT(connectResult);
-	}
-
-	QNetworkRequest request;
-	request.setUrl(QUrl(url));
-	mNetworkManager->get(request);
-
-	qDebug() << TAG << "RestClient::fetchData() has successfully kicked off a request, on thread:" << QThread::currentThreadId();
-}
-
 /*
  * GET
  */
-void RESTClient::fetchData(const QString& cmd, const QList<QPair<QString, QString> >* data) {
+void RESTClient::fetchData(const QString& cmd) {
 	qDebug() << TAG << "Fetching " << cmd;
 
 	if (mNetworkManager == 0) {
@@ -112,35 +88,24 @@ void RESTClient::fetchData(const QString& cmd, const QList<QPair<QString, QStrin
 		Q_ASSERT(connectResult);
 	}
 
-	QList<QPair<QString, QString> > query;
-	QPair<QString, QString> pair(CMD, cmd);
-	query.append(pair);
-
-	// Add any passed in key/value pairs to our query
-	if (data != 0) {
-		query.append(*data);
-	}
-
 	QNetworkRequest request;
-	request.setUrl(buildUri(query));
+	request.setUrl(buildUri(cmd));
 	mNetworkManager->get(request);
 
 	qDebug() << "RestClient::fetchData() has successfully kicked off a request, on thread:" << QThread::currentThreadId();
 }
 
-QString RESTClient::buildFilename(const QString& cmd, const QString& tvdbid)
+QString RESTClient::buildFilename(const QString& cmd)
 {
-	if (cmd.compare(CMD_SHOWS) == 0)
-		return QDir::homePath() + SettingsManager::DATA_DIR + SettingsManager::FILE_SHOWS;
-	if (cmd.compare(CMD_HISTORY) == 0)
-		return QDir::homePath() + SettingsManager::DATA_DIR + SettingsManager::FILE_HISTORY;
-	if (cmd.compare(CMD_FUTURE) == 0)
-		return QDir::homePath() + SettingsManager::DATA_DIR + SettingsManager::FILE_FUTURE;
-	if (cmd.compare(CMD_SHOW) == 0)
-		return QDir::homePath() + SettingsManager::DATA_DIR + SettingsManager::SHOW_DETAILS_DIR + tvdbid + ".json";
+	if (cmd.compare(CMD_FACTS) == 0)
+		return QDir::homePath() + DATA_DIR + FILENAME_FACTS;
+	if (cmd.compare(CMD_TIPS) == 0)
+		return QDir::homePath() + DATA_DIR + FILENAME_TIPS;
+	if (cmd.compare(CMD_CARBON_FOOTPRINTS) == 0)
+		return QDir::homePath() + DATA_DIR + FILENAME_CARBON_FOOTPRINTS;
 
 	// No match return tmp filename
-	return QDir::homePath() + SettingsManager::DATA_DIR + "tmp.log";
+	return QDir::homePath() + DATA_DIR + "tmp.log";
 }
 
 void RESTClient::slotRequestFinished(QNetworkReply* reply) {
@@ -160,70 +125,50 @@ void RESTClient::slotRequestFinished(QNetworkReply* reply) {
 		QByteArray bytes = reply->readAll();
 		qDebug() << TAG << "READ ALL BYTES SUCCESSFULLY";
 
-		if (cmd.compare(CMD_PING) == 0) {  // Handle ping response
-			JsonDataAccess jda;
-			QVariantMap map = jda.loadFromBuffer(bytes).toMap();
-			if (map.value("result").toString().compare("success") == 0) {
-				emit pong("pong");
-			} else {
-				emit pong("api");
-			}
-		} else { // Handle download file
-			QString data(bytes);
-			qDebug() << TAG << "CONVERT BYTES TO STRING";
+		QString data(bytes);
+		qDebug() << TAG << "CONVERT BYTES TO STRING";
 
-			QString filename = getFilename(url);
-			qDebug() << TAG << "SET FILENAME: " << filename;
+		QString filename = getFilename(url);
+		qDebug() << TAG << "SET FILENAME: " << filename;
 
-			QFile file(QDir::homePath() + SettingsManager::DATA_DIR + filename);
-			qDebug() << TAG << file.fileName();
-			if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-			{
-				// OK, now we go ahead and load main application with new stuff
-				//emit updatedFinished("slotDownloadRequestFinished(...): File could not be saved");
-				qDebug() << "slotDownloadRequestFinished(...): File could not be saved";
-				return;
-			}
-
-			QTextStream out(&file);
-			out << data;
-			file.close();
-
-			emit downloadComplete(getCmd(url));
+		QFile file(QDir::homePath() + SettingsManager::DATA_DIR + filename);
+		qDebug() << TAG << file.fileName();
+		if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+		{
+			// OK, now we go ahead and load main application with new stuff
+			//emit updatedFinished("slotDownloadRequestFinished(...): File could not be saved");
+			qDebug() << "slotDownloadRequestFinished(...): File could not be saved";
+			return;
 		}
+
+		QTextStream out(&file);
+		out << data;
+		file.close();
+
+		emit downloadComplete(getCmd(url));
 	} else {
 		if(reply->error() < QNETWORKREPLY_ERROR_LAYER_5_THRESHOLD) {
 			// TCP, IP, or otherwise network layer faults
 			qDebug() << "fetch request failed, network error: ";
-			emit pong("network");
 		} else {
 			// HTTP faults
 			qDebug() << "fetch request failed, HTTP error: '" + statusCodeV.toString() + "' occurred";
-			emit pong("http");
 		}
 		// we don't emit the signal.
 	}
 }
 
-QString RESTClient::getFilename(const QUrl& url, const QString& tvdbid)
+QString RESTClient::getFilename(const QUrl& url)
 {
-	QString cmd = url.queryItemValue(CMD);
+	QString cmd = getCmd(url);
 
 	qDebug() << TAG << "CMD: " << cmd;
-	if (cmd.compare(CMD_SHOWS) == 0)
-		return SettingsManager::FILE_SHOWS;
-	if (cmd.compare(CMD_HISTORY) == 0)
-		return SettingsManager::FILE_HISTORY;
-	if (cmd.compare(CMD_FUTURE) == 0)
-		return SettingsManager::FILE_FUTURE;
-	if (cmd.compare(CMD_PING) == 0)
-		return SettingsManager::FILE_PONG;
-	if (cmd.compare(CMD_SHOW) == 0) {
-		QString tvdbid = url.queryItemValue(QUERY_TVDBID);
-		if (!tvdbid.isEmpty() & !tvdbid.isNull()) {
-			return SettingsManager::SHOW_DETAILS_DIR + tvdbid + ".json";
-		}
-	}
+	if (cmd.compare(CMD_FACTS) == 0)
+		return FILENAME_FACTS;
+	if (cmd.compare(CMD_TIPS) == 0)
+		return FILENAME_TIPS;
+	if (cmd.compare(CMD_CARBON_FOOTPRINTS) == 0)
+		return FILENAME_CARBON_FOOTPRINTS;
 
 	// No match return
 	return "tmp.log";
@@ -231,7 +176,7 @@ QString RESTClient::getFilename(const QUrl& url, const QString& tvdbid)
 
 QString RESTClient::getCmd(const QUrl& url)
 {
-	QString cmd = url.queryItemValue(CMD);
+	QString cmd = url.path();
 	return cmd;
 }
 

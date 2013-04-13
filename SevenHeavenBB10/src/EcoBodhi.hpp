@@ -1,6 +1,6 @@
 // Tabbed pane project template
-#ifndef ApplicationUI_HPP_
-#define ApplicationUI_HPP_
+#ifndef ECOBODHI_HPP_
+#define ECOBODHI_HPP_
 
 #include <QObject>
 
@@ -11,12 +11,15 @@ namespace bb { namespace cascades { class Application; }}
  *
  *Use this object to create and init app UI, to create context objects, to register the new meta types etc.
  */
-class ApplicationUI : public QObject
+class EcoBodhi : public QObject
 {
     Q_OBJECT
 public:
-    ApplicationUI(bb::cascades::Application *app);
-    virtual ~ApplicationUI() {}
+    EcoBodhi(bb::cascades::Application *app);
+    virtual ~EcoBodhi() {}
+
+private:
+    void refreshData();
 };
 
-#endif /* ApplicationUI_HPP_ */
+#endif /* ECOBODHI_HPP_ */

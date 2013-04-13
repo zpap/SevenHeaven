@@ -1,5 +1,6 @@
 // Tabbed pane project template
-#include "applicationui.hpp"
+#include "EcoBodhi.hpp"
+#include "RESTClient.hpp"
 
 #include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
@@ -7,7 +8,7 @@
 
 using namespace bb::cascades;
 
-ApplicationUI::ApplicationUI(bb::cascades::Application *app)
+EcoBodhi::EcoBodhi(bb::cascades::Application *app)
 : QObject(app)
 {
     // create scene document from main.qml asset
@@ -18,4 +19,14 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app)
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     // set created root object as a scene
     app->setScene(root);
+
+    // Update our data
+    refreshData();
+}
+
+void EcoBodhi::refreshData()
+{
+    RESTClient::instance().fetchData(RESTClient::CMD_FACTS);
+    RESTClient::instance().fetchData(RESTClient::CMD_TIPS);
+    RESTClient::instance().fetchData(RESTClient::CMD_CARBON_FOOTPRINTS);
 }
