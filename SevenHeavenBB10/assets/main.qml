@@ -21,7 +21,7 @@ TabbedPane {
     Tab {
         title: qsTr("Home")
         HomePage {
-            title: qsTr("Home")
+            title: qsTr("Eco Bodhi")
         }
     }
     Tab {
@@ -40,6 +40,12 @@ TabbedPane {
         title: qsTr("Eco Facts")
         EcoFactsPage {
             title: qsTr("Eco Facts")
+        }
+    }
+    Tab {
+        title: qsTr("Eco Tips")
+        EcoTipsPage {
+            title: qsTr("Eco Tips")
         }
     }
     onCreationCompleted: {
