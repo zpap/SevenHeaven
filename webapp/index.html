@@ -52,6 +52,11 @@
             <!-- Content for the Home page -->
             <h1>Home</h1>
             <div class="inner_content">
+                <p>Our application is not just another application about global warming. 
+                It is designed to raise awareness about our environment (check out Facts section) but most of all, it can help you to step up and TAKE action. 
+                We offer easy ideas on how to do that in our Tips section. 
+ World map section offers interaction by giving you the possibility to select a country and we will display the carbon footprint, global warming and sea level in a chart. 
+<br/>Remember: Nature, to be commanded, must be obeyed.</p>
                 <p>The name idea came in our search for originality. &quot;Bodhi&quot; is the sanscrit meaning of &quot;knowledge&quot; and &quot;enlightenment&quot;. So, &quot;Eco Bodhi&quot; application was originally planned to raise a flag about our environmental issues, how each one of us contributes to it ..but most of all, how we can make a difference in creating a better world.
                     Most of the information and images used in the app are not part of our creation, due to the scope of the project and the timeframe.
                 </p>
@@ -61,7 +66,18 @@
 
         <div id="mapPage" class="box">
             <!-- Content for the Map page -->
+            <!-- Map -->
             <div id="world-map" style="width: 600px; height: 400px"></div>
+            <!-- (Toogle) buttons -->
+            <div id="buttonsArea">
+
+                <input type="radio" id="warmingOpt" name="categorySelector" value="warming" checked>Global Warming
+                <input type="radio" id="carbonOpt" name="categorySelector" value="carbon">Carbon Footprint
+                <input type="radio" id="sealevelOpt" name="categorySelector" value="sealevel">Sea level
+
+                <input type="button" id="btnResetChart" value="Reset Chart">
+            </div>
+            <!-- Chart -->
             <div class="chart-wrapper" style="width: 600px; height: 400px">
                 <div id="chart"></div>
             </div>
