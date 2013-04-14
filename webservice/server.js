@@ -1,6 +1,10 @@
 var express = require("express");
 var app = express();
 
+app.use(express.static(__dirname + '/../webapp'));
+
+
+
 // ------------------------------------------- Tips  -----------------------------
 
 function Tip (title, description) {
@@ -88,9 +92,9 @@ app.configure(function() {
 
 // --------------------------------------- REST -----------------------------------
 
-app.get('/', function(request, response) {
-    response.send('Welcome in Seven Heaven');
-});
+//app.get('/', function(request, response) {
+//    response.send('Welcome in Seven Heaven');
+//});
 
 app.get('/carbonFootprints', function(request, response) {
     try {
