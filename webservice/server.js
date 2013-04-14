@@ -28,7 +28,7 @@ TipsRepository.prototype.findAll = function () {
 }
 
 // ------------------------------------------- Facts  -----------------------------
-
+/*
 function Fact (title, description) {
     this.title = title;
     this.description = description;
@@ -45,7 +45,7 @@ FactsRepository.prototype.findAll = function () {
     }
 
     return results;
-}
+}      */
 
 // ------------------------------------ Carbon Footprint -------------------------
 
@@ -117,14 +117,15 @@ app.get('/tips', function(request, response) {
 });
 
 app.get('/facts', function(request, response) {
-    try {
+    /*try {
         var facts = factsRepository.findAll();
         var errorMessage = "no error";
         var result = "success";
         response.json({data: facts, message: errorMessage, result: result});
     } catch (exception) {
         response.send(404);
-    }
+    }         */
+    response.render('data/facts.json')
 });
 
 
