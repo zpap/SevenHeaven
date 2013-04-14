@@ -35,12 +35,33 @@ $('.tab').click(function(event) {
     };
 
     var gdpData = {
-        "IN": 132.04,
-        "DE": 3300.54,
-        "RU": 1456.87,
-        "US": 14511.05
+        "IN": 5,
+        "DE": 5,
+        "RU": 5,
+        "US": 5
     };
     <!-- end of Test data -->
+
+    <!-- Hardcoded country coordinates -->
+    var countryCoordinates = {
+        "DE": {
+            "lat": "50N",
+            "long": "10E"
+        },
+        "RU": {
+            "lat": "60N",
+            "long": "97.5E"
+        },
+        "US": {
+            "lat": "40N",
+            "long": "105W"
+        },
+        "IN": {
+            "lat":"22N",
+            "long":"80E"
+        }
+    };
+    <!-- end of Hardcoded country coordinates -->
 
     var map;
     var categoryNames = {
@@ -118,7 +139,7 @@ $('.tab').click(function(event) {
             },
 
             onRegionClick: function(event, code) {
-                console.log(' Clicked on country: '+code);
+                console.log(' Clicked on country: '+code+', coordinates: '+JSON.stringify(countryCoordinates[code], null, "\t"));
                 addRemoveCountryToChart(code);
             }
         });
@@ -149,7 +170,7 @@ $('.tab').click(function(event) {
             },
             valueAxis: {
                 labels: {
-                    format: "{0}%"
+                    format: "{0}"
                 },
                 line: {
                     visible: false
@@ -161,6 +182,11 @@ $('.tab').click(function(event) {
                 majorGridLines: {
                     visible: false
                 }
+            },
+            tooltip: {
+                visible: true,
+                format: "{0}",
+                template: "#= series.name #: #= value #"
             }
         });
     };
