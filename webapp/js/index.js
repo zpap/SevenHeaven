@@ -70,6 +70,7 @@ $('.tab').click(function(event) {
         "sealevel": "Sea Level"
     }
     var selectedCountries = [];
+    var selectedCoordinates = {};
     var defaultCategory = "warming";
     var MAX_COUNTRY_SELECTION = 3;
     var selectedCategory = defaultCategory;
@@ -150,6 +151,7 @@ $('.tab').click(function(event) {
 
             if (latLng && (!targetCls || (targetCls && $(e.target).attr('class').indexOf('jvectormap-marker') === -1))) {
                 console.log(' Clicked at lat: '+latLng.lat+ ' long: '+latLng.lng);
+                setSelectedCoordinates(latLng);
             }
         });
     }
@@ -189,6 +191,32 @@ $('.tab').click(function(event) {
                 template: "#= series.name #: #= value #"
             }
         });
+    };
+
+    // Generate acceptable coordinates for the REST from precise coordinates
+    function setSelectedCoordinates(latLng) {
+        //latLng.lat+ ' long: '+latLng.lng
+        var lat = Math.round(latLng.lat);
+        if (lat%2 == 1) {
+            lat++;
+        }
+        if (lat > 0) {
+            lat = lat + 'N';
+        } else {
+            lat = Math.abs(lat) + 'S';
+        }
+        var long = Math.round(latLng.lng);
+        if (long%2.5 != 0) {
+            long = long - long%2.5;
+        }
+        if (long > 0) {
+            long = long + 'E';
+        } else {
+            long = Math.abs(long) + 'W';
+        }
+        selectedCoordinates.lat = lat;
+        selectedCoordinates.long = long;
+        console.log(' Calculated coordinates: '+JSON.stringify(selectedCoordinates, null, "\t"));
     };
 
 // Adds country code to the chart, or if already added, remove is
