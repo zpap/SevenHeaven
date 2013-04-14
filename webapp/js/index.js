@@ -64,7 +64,7 @@ $('.tab').click(function(event) {
     <!-- end of Hardcoded country coordinates -->
 
     //var WEB_SERVICE_URL = "http://eco-bodhi.herokuapp.com";
-    var WEB_SERVICE_URL = "http://172.24.10.39:5000";
+    var WEB_SERVICE_URL = "http://172.24.10.42:5000";
     var map;
     var categoryNames = {
         "warming": "Global Warming",
