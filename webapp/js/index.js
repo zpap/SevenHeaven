@@ -63,6 +63,8 @@ $('.tab').click(function(event) {
     };
     <!-- end of Hardcoded country coordinates -->
 
+    //var WEB_SERVICE_URL = "http://eco-bodhi.herokuapp.com";
+    var WEB_SERVICE_URL = "http://172.24.10.39:5000";
     var map;
     var categoryNames = {
         "warming": "Global Warming",
@@ -294,9 +296,10 @@ $('.tab').click(function(event) {
             chart.refresh();
         } else {
             var country = selectedCountries[nextCountryindex];
+            urlToUse = WEB_SERVICE_URL + "/carbonFootprint/" + countryCoordinates[country].long + '/' + countryCoordinates[country].lat;
             // Make REST call
             $.ajax({
-                url: "http://eco-bodhi.herokuapp.com/carbonFootprint/10W/50N",
+                url: urlToUse,
                 type: "GET",
                 dataType: "json",
 
