@@ -47,6 +47,8 @@ fs.readFile('CO2.xml', function(err, data) {
     });
 });
 
+app.use(express.static(__dirname + '/../webapp'));
+
 // ------------------------------------------- Tips  -----------------------------
 
 function Tip (title, description) {
@@ -168,9 +170,9 @@ app.configure(function() {
 
 // --------------------------------------- REST -----------------------------------
 
-app.get('/', function(request, response) {
-    response.send('Welcome in Seven Heaven');
-});
+//app.get('/', function(request, response) {
+//    response.send('Welcome in Seven Heaven');
+//});
 
 app.get('/tips', function(request, response) {
     try {

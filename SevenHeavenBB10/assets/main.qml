@@ -1,6 +1,8 @@
 // Tabbed Pane project template
 import bb.cascades 1.0
 import "home"
+import "tips"
+import "facts"
 
 TabbedPane {
     Menu.definition: MenuDefinition {
@@ -28,12 +30,6 @@ TabbedPane {
         title: qsTr("Interactive Map")
         MapPage {
             title: qsTr("Interactive Map")
-        }
-    }
-    Tab {
-        title: qsTr("Top Countries")
-        TopCountriesPage {
-            title: qsTr("Top Countries")
         }
     }
     Tab {

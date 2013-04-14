@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>World Map</title>
+  <title>Eco Bodhi -  Global Awareness about Climate Changes</title>
 
   <script src="jquery/jquery-1.9.0.min.js"></script>
+
+    <!-- Reset style -->
+    <link rel="stylesheet" href="styles/normalize.css" type="text/css" media="screen"/>
 
     <!-- jVectorMap style -->
   <link rel="stylesheet" href="jvectormap/jquery-jvectormap-1.2.2.css" type="text/css" media="screen"/>
@@ -18,125 +21,115 @@
 <!--    <script src="js/jquery.min.js"></script> -->
     <script src="kendo/js/kendo.all.min.js"></script>
 
+
+    <!-- Index script -->
+    <script src="js/index.js"></script>
+
+
+    <!-- Index style -->
+    <link rel="stylesheet" href="styles/styles.css" type="text/css" media="screen"/>
+
 </head>
 <body>
+<div id="header">
+    <div id="logo_area"><div id="logo"></div> <a href="#">Eco  <abbr title="Bodhi means Awareness. It comes from Buddhism">Bodhi</abbr></a></div>
+    <div id="quote"></div>
+</div>
 
-  <div id="world-map" style="width: 600px; height: 400px"></div>
-  <div class="chart-wrapper" style="width: 600px; height: 400px">
-      <div id="chart"></div>
-  </div>
+<div id="menu">
+    <a id="btnHome" class="tab" href="#"><span class="icon"></span>Home</a>
+    <a id="btnMap" class="tab active" href="#"><span class="icon"></span>Interactive Map</a>
+    <a id="btnFacts" class="tab"  href="#"><span class="icon"></span>Facts</a>
+    <a id="btnTips" class="tab"  href="#"><span class="icon"></span>Tips</a>
+    <a id="btnAbout" class="tab"  href="#"><span class="icon"></span>About</a>
+</div>
 
-  <script>
-      var globalWarmingData = {
-          "IN": {
-              name: "India",
-              data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855]
-          },
-          "RU": {
-              name: "Russian Federation",
-              data: [4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3]
-          },
-          "US": {
-              name: "United States of America",
-              data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727]
-          },
-          "DE": {
-              name: "Germany",
-              data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
-          }
-      };
+<div id="body" class="k-content">
 
-    $(function(){
+    <div id="pageContents" style="display:none">
 
-      <!-- Testing Data -->
-      var gdpData = {
-            "IN": 132.04,
-            "DE": 3300.54,
-            "RU": 1456.87,
-            "US": 14511.05
-      };
+        <div id="homePage" class="box">
+            <!-- Content for the Home page -->
+            <h1>Home</h1>
+            <div class="inner_content">
+                <p>Our application is not just another application about global warming. 
+                It is designed to raise awareness about our environment (check out Facts section) but most of all, it can help you to step up and TAKE action. 
+                We offer easy ideas on how to do that in our Tips section. 
+ World map section offers interaction by giving you the possibility to select a country and we will display the carbon footprint, global warming and sea level in a chart. 
+<br/>Remember: Nature, to be commanded, must be obeyed.</p>
+                <p>The name idea came in our search for originality. &quot;Bodhi&quot; is the sanscrit meaning of &quot;knowledge&quot; and &quot;enlightenment&quot;. So, &quot;Eco Bodhi&quot; application was originally planned to raise a flag about our environmental issues, how each one of us contributes to it ..but most of all, how we can make a difference in creating a better world.
+                    Most of the information and images used in the app are not part of our creation, due to the scope of the project and the timeframe.
+                </p>
+				<img src="img/polarbear_ice_melting.jpg" style="margin-left: -10px;"></img>
+            </div>
+        </div>
 
+        <div id="mapPage" class="box">
+            <!-- Content for the Map page -->
+            <!-- Map -->
+            <div id="world-map" style="width: 600px; height: 400px"></div>
+            <!-- (Toogle) buttons -->
+            <div id="buttonsArea">
 
+                <input type="radio" id="warmingOpt" name="categorySelector" value="warming" checked>Global Warming
+                <input type="radio" id="carbonOpt" name="categorySelector" value="carbon">Carbon Footprint
+                <input type="radio" id="sealevelOpt" name="categorySelector" value="sealevel">Sea level
 
-      map = new jvm.WorldMap({
-          container: $('#world-map'),
-          map: 'world_mill_en',
-          series: {
-              regions: [{
-                  values: gdpData,
-                  scale: ['#C8EEFF', '#0071A4'],
-                  normalizeFunction: 'polynomial'
-              }]
-          },
-          onRegionLabelShow: function(e, el, code){
-              //el.html(el.html()+' (GDP - '+gdpData[code]+')');
-          },
+                <input type="button" id="btnResetChart" value="Reset Chart">
+            </div>
+            <!-- Chart -->
+            <div class="chart-wrapper" style="width: 600px; height: 400px">
+                <div id="chart"></div>
+            </div>
+        </div>
 
-          onRegionClick: function(event, code) {
-              console.log(' Clicked on country: '+code);
-              addCountryToChart(code);
-          }
-      });
+        <div id="factsPage" class="box">
+            <!-- Content for the Facts page -->
+            <h1>Facts</h1>
+        </div>
 
-      map.container.click(function(e){
-          var latLng = map.pointToLatLng(e.offsetX, e.offsetY),
-          targetCls = $(e.target).attr('class');
+        <div id="tipsPage" class="box">
+            <!-- Content for the Facts page -->
+            <h1>Tips</h1>
+        </div>
 
-          if (latLng && (!targetCls || (targetCls && $(e.target).attr('class').indexOf('jvectormap-marker') === -1))) {
-              console.log(' Clicked at lat: '+latLng.lat+ ' long: '+latLng.lng);
-          }
-      });
+        <div id="aboutPage" class="box">
+            <!-- Content for the About page -->
+            <h1>About</h1>
+            <div class="inner_content">
+                <p>
+                    <b>&quot;Seven Heaven&quot; team:</b>  <br/>
+                    Rob Woods<br/>
+                    Bela Bartha<br/>
+                    Anca Lucan<br/>
+                    Tamas Visky<br/>
+                    Dunni Abiodun<br/>
+                    Simon Pythoud<br/>
+                    Zoltan Pap-David
+                </p>
+                <p>
+                    <b>Technology:</b><br/>
+                    Data DB used: NASA (<a href="http://mynasadata.larc.nasa.gov/las3/getUI.do">http://mynasadata.larc.nasa.gov/las3/getUI.do</a>)<br/>
+                    Data Visualization: Kendo UI<br/>
+                    Cloud Services: Heroku
+                 </p>
+                <p>
+                    <img src="https://si0.twimg.com/profile_images/188302352/nasalogo_twitter.jpg" class="small" alt="Nasa"/>
+                    <img src="http://1.bp.blogspot.com/-4A-dkvSCvMQ/UOvO_x671uI/AAAAAAAAANw/m4YzWBnNcBE/s1600/KendoUI.jpg" class="small" alt="Kendo UI"/>
+                    <img src="http://thoughts.tquila.com/wp-content/uploads/2013/02/heroku-300pxw.png" class="small" alt="Heroku"/>
+                </p>
+            <iframe width="560" height="315" src="http://www.youtube.com/embed/bmQGR7PC1fA" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
 
-    });
+    </div>
 
-    function createChart() {
-        $("#chart").kendoChart({
-            title: {
-                text: "Global Warming"
-            },
-            legend: {
-                position: "bottom"
-            },
-            chartArea: {
-                background: ""
-            },
-            seriesDefaults: {
-                type: "line"
-            },
-            valueAxis: {
-                labels: {
-                    format: "{0}%"
-                },
-                line: {
-                    visible: false
-                },
-                axisCrossingValue: -10
-            },
-            categoryAxis: {
-                categories: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
-                majorGridLines: {
-                    visible: false
-                }
-            }
-        });
-    };
-
-    function addCountryToChart(code) {
-        var chart = $("#chart").data("kendoChart");
-        var series = chart.options.series;
-
-        series.push(globalWarmingData[code]);
-        chart.refresh();
-    }
-
-    $(document).ready(function() {
-        setTimeout(function() {
-            // Initialize the chart with a delay to make sure
-            // the initial animation is visible
-            createChart();
-        }, 400);
-    });
-
-  </script>
-</body>
+    <div id="container">
+        <div class="side" id="face">
+            Face
+        </div>
+        <div class="side" id="back">
+            Back
+        </div>
+    </div>
 </html>
