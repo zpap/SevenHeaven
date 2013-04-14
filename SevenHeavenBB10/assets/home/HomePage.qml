@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import eco.bodhi 1.0
 
 Page {
     property alias title: homeTitleBar.title

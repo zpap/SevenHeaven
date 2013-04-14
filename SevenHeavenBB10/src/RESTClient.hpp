@@ -25,10 +25,12 @@ public:
 	static const QString CMD_FACTS;
 	static const QString CMD_TIPS;
 	static const QString CMD_CARBON_FOOTPRINTS;
+	static const QString CMD_QUOTES;
 
 	static const QString FILENAME_FACTS;
 	static const QString FILENAME_TIPS;
 	static const QString FILENAME_CARBON_FOOTPRINTS;
+	static const QString FILENAME_QUOTES;
 
 	RESTClient();
 	virtual ~RESTClient();

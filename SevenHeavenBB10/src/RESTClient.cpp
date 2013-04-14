@@ -28,9 +28,11 @@ const QString RESTClient::BASE_URL 						= "http://eco-bodhi.herokuapp.com";
 const QString RESTClient::CMD_FACTS 					= "/facts";
 const QString RESTClient::CMD_TIPS 						= "/tips";
 const QString RESTClient::CMD_CARBON_FOOTPRINTS 		= "/carbonFootprints";
+const QString RESTClient::CMD_QUOTES					= "/quotes";
 const QString RESTClient::FILENAME_FACTS 				= "facts.json";
 const QString RESTClient::FILENAME_TIPS 				= "tips.json";
 const QString RESTClient::FILENAME_CARBON_FOOTPRINTS 	= "carbon-footprints.json";
+const QString RESTClient::FILENAME_QUOTES				= "quotes.json";
 
 /* Constructor */
 RESTClient::RESTClient()
@@ -102,6 +104,8 @@ QString RESTClient::buildFilename(const QString& cmd)
 		return QDir::homePath() + DATA_DIR + FILENAME_TIPS;
 	if (cmd.compare(CMD_CARBON_FOOTPRINTS) == 0)
 		return QDir::homePath() + DATA_DIR + FILENAME_CARBON_FOOTPRINTS;
+	if (cmd.compare(CMD_QUOTES) == 0)
+		return QDir::homePath() + DATA_DIR + FILENAME_QUOTES;
 
 	// No match return tmp filename
 	return QDir::homePath() + DATA_DIR + "tmp.log";
@@ -168,6 +172,8 @@ QString RESTClient::getFilename(const QUrl& url)
 		return FILENAME_TIPS;
 	if (cmd.compare(CMD_CARBON_FOOTPRINTS) == 0)
 		return FILENAME_CARBON_FOOTPRINTS;
+	if (cmd.compare(CMD_QUOTES) == 0)
+		return FILENAME_QUOTES;
 
 	// No match return
 	return "tmp.log";
