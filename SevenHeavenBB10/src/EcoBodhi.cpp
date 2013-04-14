@@ -2,6 +2,7 @@
 #include "EcoBodhi.hpp"
 #include "RESTClient.hpp"
 #include "controllers/SimpleDataController.hpp"
+#include "controllers/QuotesController.hpp"
 
 #include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
@@ -18,6 +19,9 @@ EcoBodhi::EcoBodhi(bb::cascades::Application *app)
 
     // register type SimpleDataController to enable its instantiation in QML
     qmlRegisterType<SimpleDataController>("eco.bodhi", 1, 0, "SimpleDataController");
+
+    // register type QuotesController to enable it's instantiation in QML
+    qmlRegisterType<QuotesController>("eco.bodhi", 1, 0, "QuotesController");
 
     // create scene document from main.qml asset
     // set parent to created document to ensure it exists for the whole application lifetime
@@ -42,4 +46,5 @@ void EcoBodhi::refreshData()
     RESTClient::instance().fetchData(RESTClient::CMD_FACTS);
     RESTClient::instance().fetchData(RESTClient::CMD_TIPS);
     RESTClient::instance().fetchData(RESTClient::CMD_CARBON_FOOTPRINTS);
+    RESTClient::instance().fetchData(RESTClient::CMD_QUOTES);
 }

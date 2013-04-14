@@ -33,12 +33,6 @@ TabbedPane {
         }
     }
     Tab {
-        title: qsTr("Top Countries")
-        TopCountriesPage {
-            title: qsTr("Top Countries")
-        }
-    }
-    Tab {
         title: qsTr("Eco Facts")
         EcoFactsPage {
             title: qsTr("Eco Facts")
