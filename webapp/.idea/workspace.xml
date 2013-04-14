@@ -4,8 +4,8 @@
     <list default="true" id="880321f0-fa62-4b7e-a5ef-464df2160ac6" name="Default" comment="" />
     <ignored path="webapp.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/index.html" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365910175228" ignored="false" />
-    <file path="/styles.css" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365911040680" ignored="false" />
+    <file path="/index.html" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365918926794" ignored="false" />
+    <file path="/styles.css" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365918797585" ignored="false" />
     <file path="/map.css" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365905461562" ignored="false" />
     <file path="/index.js" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365908190068" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,31 +68,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="114" selection-start="1365" selection-end="1365" vertical-scroll-proportion="-21.25">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/map.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="0" selection-start="873" selection-end="947" vertical-scroll-proportion="-14.375">
+            <state line="59" column="155" selection-start="2571" selection-end="2571" vertical-scroll-proportion="0.49940404">
               <folding>
-                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="styles.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="styles.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/styles/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="113" column="145" selection-start="2103" selection-end="2103" vertical-scroll-proportion="0.8538368">
+            <state line="184" column="0" selection-start="3185" selection-end="3223" vertical-scroll-proportion="-9.745455">
               <folding />
             </state>
           </provider>
@@ -101,7 +92,16 @@
       <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="149" selection-start="574" selection-end="574" vertical-scroll-proportion="0.0">
+            <state line="166" column="7" selection-start="4725" selection-end="4725" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="map.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/map.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="64" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -117,11 +117,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/map.html" />
         <option value="$PROJECT_DIR$/styles/map.css" />
         <option value="$PROJECT_DIR$/js/index.js" />
-        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/map.html" />
         <option value="$PROJECT_DIR$/styles/styles.css" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -437,23 +437,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/map.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="64" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="149" selection-start="574" selection-end="574" vertical-scroll-proportion="0.0">
+        <state line="166" column="7" selection-start="4725" selection-end="4725" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/map.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="873" selection-end="947" vertical-scroll-proportion="-14.375">
+        <state line="29" column="0" selection-start="1056" selection-end="1056" vertical-scroll-proportion="0.5105634">
           <folding>
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -461,17 +454,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="114" selection-start="1365" selection-end="1365" vertical-scroll-proportion="-21.25">
+        <state line="33" column="64" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/styles/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="145" selection-start="2103" selection-end="2103" vertical-scroll-proportion="0.8538368">
+        <state line="184" column="0" selection-start="3185" selection-end="3223" vertical-scroll-proportion="-9.745455">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="155" selection-start="2571" selection-end="2571" vertical-scroll-proportion="0.49940404">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
