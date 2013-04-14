@@ -65,7 +65,18 @@
 
         <div id="mapPage" class="box">
             <!-- Content for the Map page -->
+            <!-- Map -->
             <div id="world-map" style="width: 600px; height: 400px"></div>
+            <!-- (Toogle) buttons -->
+            <div id="buttonsArea">
+
+                <input type="radio" id="warmingOpt" name="categorySelector" value="warming" checked>Global Warming
+                <input type="radio" id="carbonOpt" name="categorySelector" value="carbon">Carbon Footprint
+                <input type="radio" id="sealevelOpt" name="categorySelector" value="sealevel">Sea level
+
+                <input type="button" id="btnResetChart" value="Reset Chart">
+            </div>
+            <!-- Chart -->
             <div class="chart-wrapper" style="width: 600px; height: 400px">
                 <div id="chart"></div>
             </div>

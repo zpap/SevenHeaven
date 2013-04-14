@@ -43,6 +43,15 @@ $('.tab').click(function(event) {
     <!-- end of Test data -->
 
     var map;
+    var categoryNames = {
+        "warming": "Global Warming",
+        "carbon": "Carbon Footprint",
+        "sealevel": "Sea Level"
+    }
+    var selectedCountries = [];
+    var defaultCategory = "warming";
+    var MAX_COUNTRY_SELECTION = 3;
+    var selectedCategory = defaultCategory;
 
     <!-- Creating page flip effect object -->
     var effect = kendo.fx("#container").flipHorizontal($("#face"), $("#back")).duration(300),
@@ -75,11 +84,14 @@ $('.tab').click(function(event) {
         }
 
         if (pageName == "mapPage") {
-            console.log('Need to create map and chart..');
             createMap();
+            // link control handlers on the map page
+            $("div.side #btnResetChart").click(function() {
+                resetChart();
+            });
+            $("input[name='categorySelector']").change(categoryChanged);
+            // Initialize the chart with a delay to make sure the initial animation is visible
             setTimeout(function() {
-                // Initialize the chart with a delay to make sure
-                // the initial animation is visible
                 createChart();
             }, 400);
         }
@@ -107,7 +119,7 @@ $('.tab').click(function(event) {
 
             onRegionClick: function(event, code) {
                 console.log(' Clicked on country: '+code);
-                addCountryToChart(code);
+                addRemoveCountryToChart(code);
             }
         });
 
@@ -153,11 +165,51 @@ $('.tab').click(function(event) {
         });
     };
 
-    function addCountryToChart(code) {
-        var chart = $("div.side #chart").data("kendoChart");
-        var series = chart.options.series;
+// Adds country code to the chart, or if already added, remove is
+    function addRemoveCountryToChart(code) {
+        var newSelection = [];
 
-        series.push(globalWarmingData[code]);
+        var alreadySelected = false;
+        for (i=0; i<selectedCountries.length; i++) {
+            if (selectedCountries[i] == code) {
+                alreadySelected = true;
+            } else {
+                newSelection.push(selectedCountries[i]);
+            }
+        }
+        if (!alreadySelected) {
+            newSelection.push(code);
+        }
+
+        if (newSelection.length <= MAX_COUNTRY_SELECTION) {
+            selectedCountries = newSelection.slice(0, newSelection.length);
+        } else {
+            selectedCountries = newSelection.slice(1, newSelection.length);
+        }
+        updateChart();
+    }
+
+    function resetChart() {
+        selectedCountries = [];
+        updateChart();
+    }
+
+    function categoryChanged() {
+        selectedCategory = $(this).val();
+        updateChart();
+    }
+
+    function updateChart() {
+        var chart = $("div.side #chart").data("kendoChart");
+
+        // Change Title of the Chart
+        chart.options.title.text = categoryNames[selectedCategory];
+
+        // Update chart data
+        chart.options.series = [];
+        for (i=0; i<selectedCountries.length; i++) {
+            chart.options.series.push(globalWarmingData[selectedCountries[i]])
+        }
         chart.refresh();
     }
 
