@@ -18,6 +18,9 @@ public:
     EcoBodhi(bb::cascades::Application *app);
     virtual ~EcoBodhi() {}
 
+Q_SIGNALS:
+    void loadData(const QString& cmd);
+
 private:
     void refreshData();
 };
