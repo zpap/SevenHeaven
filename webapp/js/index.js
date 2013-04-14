@@ -267,7 +267,7 @@ $('.tab').click(function(event) {
 
         // Update chart data
         chart.options.series = [];
-        for (i=0; i<selectedCountries.length; i++) {
+        /*for (i=0; i<selectedCountries.length; i++) {
             // TODO: call REST for real data
             console.log(' TODO: call REST for real data, for country '+selectedCountries[i]);
             console.log('       coordinates are: '+JSON.stringify(countryCoordinates[selectedCountries[i]], null, "\t"));
@@ -278,6 +278,46 @@ $('.tab').click(function(event) {
             }
         }
         chart.refresh();
+        */
+
+        // recursively call for data for the countries
+        getDataForNextCountry(0);
+
+
+    }
+
+    function getDataForNextCountry(nextCountryindex) {
+
+        var chart = $("div.side #chart").data("kendoChart");
+        if (nextCountryindex == selectedCountries.length) {
+            // we have data for all countries
+            chart.refresh();
+        } else {
+            var country = selectedCountries[nextCountryindex];
+            // Make REST call
+            $.ajax({
+                url: "http://eco-bodhi.herokuapp.com/carbonFootprint/10W/50N",
+                type: "GET",
+                dataType: "json",
+
+                success: function(resultData){
+                    console.log('Got data for country: '+country);
+                    var countryData = {
+                        "name": country,
+                        "data": resultData
+                    }
+                    chart.options.series.push(countryData);
+                    getDataForNextCountry(nextCountryindex+1);
+                },
+                error: function() {
+                    console.log('Failed to get data for country: '+country);
+                    if (globalWarmingData[country] !== undefined) {
+                        chart.options.series.push(globalWarmingData[country]);
+                    }
+                    getDataForNextCountry(nextCountryindex+1);
+                }
+            });
+        }
     }
 
     <!-- Initialization on startup -->
