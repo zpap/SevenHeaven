@@ -4,8 +4,9 @@
     <list default="true" id="880321f0-fa62-4b7e-a5ef-464df2160ac6" name="Default" comment="" />
     <ignored path="webapp.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/index.html" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365899676159" ignored="false" />
-    <file path="/styles.css" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365900012949" ignored="false" />
+    <file path="/index.html" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365904992065" ignored="false" />
+    <file path="/styles.css" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365907437092" ignored="false" />
+    <file path="/map.css" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365905461562" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,22 +67,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="map.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/map.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="0" selection-start="834" selection-end="834" vertical-scroll-proportion="-14.375">
-              <folding>
-                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="90" selection-start="1470" selection-end="1470" vertical-scroll-proportion="-16.25">
+            <state line="222" column="58" selection-start="7821" selection-end="7821" vertical-scroll-proportion="-14.958333">
               <folding />
             </state>
           </provider>
@@ -90,7 +79,7 @@
       <file leaf-file-name="styles.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/styles/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="43" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.65773445">
+            <state line="85" column="91" selection-start="1508" selection-end="1508" vertical-scroll-proportion="0.59805113">
               <folding />
             </state>
           </provider>
@@ -99,7 +88,7 @@
       <file leaf-file-name="map.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="55" selection-start="1573" selection-end="1573" vertical-scroll-proportion="0.0">
+            <state line="33" column="64" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -116,8 +105,9 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/js/index.js" />
-        <option value="$PROJECT_DIR$/map.html" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/map.html" />
+        <option value="$PROJECT_DIR$/styles/map.css" />
         <option value="$PROJECT_DIR$/styles/styles.css" />
       </list>
     </option>
@@ -197,6 +187,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="jvectormap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -213,6 +217,11 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/styles" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -401,9 +410,16 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/jvectormap/jquery-jvectormap-1.2.2.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/map.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="834" selection-end="834" vertical-scroll-proportion="-14.375">
+        <state line="35" column="75" selection-start="1139" selection-end="1139" vertical-scroll-proportion="0.61619717">
           <folding>
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -411,23 +427,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/styles/map.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="18" selection-start="107" selection-end="107" vertical-scroll-proportion="0.10273973">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="55" selection-start="1573" selection-end="1573" vertical-scroll-proportion="0.0">
+        <state line="33" column="64" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="90" selection-start="1470" selection-end="1470" vertical-scroll-proportion="-16.25">
+        <state line="222" column="58" selection-start="7821" selection-end="7821" vertical-scroll-proportion="-14.958333">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/styles/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="43" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.65773445">
+        <state line="85" column="91" selection-start="1508" selection-end="1508" vertical-scroll-proportion="0.59805113">
           <folding />
         </state>
       </provider>

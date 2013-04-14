@@ -1,10 +1,8 @@
 
 #header {
     background-color: #FFF;
-    background-position: center center;
     height: 150px;
-    /*box-shadow: 0px 0px 10px 5px #ccc;*/
-    border-bottom: 4px solid #005;
+    border-bottom: 2px solid #005;
 }
 
 #logo_area {
@@ -29,7 +27,6 @@
     padding: 30px 0;
     font-size: 22px;
     text-transform: uppercase;
-    f;
 }
 
 #logo_area span {
@@ -38,40 +35,37 @@
 
 #quote {
     background-image: url('../img/swimmingpolarbear.jpg');
-    background-size: 100%;
     height: 150px;
     width: 70%;
     position: absolute;
     right: 0;
     top: 0;
+    background-position: top right;
+    background-repeat: no-repeat;
+    opacity: 0.8;
 }
 
 #menu {
     position: absolute;
     left: 0;
     top: 200px;
-    width: 250px;
-    background-color: #fff;
-    overflow: hidden;
-    opacity: 0.7;
+
 }
 
 #menu .tab {
     height: 40px;
-    width: 100%;
+    width: 220px;
     display: block;
     border-bottom: 1px solid green;
-    padding: 15px 20px 10px 20px;
+    padding: 20px 20px 5px 20px;
     font-size: 18px;
     text-decoration: none;
     text-transform: uppercase;
     color: #000;
-}
+    background-color: #fff;
 
-#menu .tab
-{
-    transition-property:width,height,background, color, font-size,opacity;
-    transition-duration:1s,1s,1s,1s,1s,1s,1s;
+    transition-property: width, background, color, opacity, text-shadow;
+    transition-duration: .5s,1s,1s,1s,1s;
     opacity:0.8;
 }
 
@@ -79,17 +73,38 @@
 {
     opacity:1;
     background:green;
-    font-size:19px;
-    color: #000;
-    width:102%;
+    color: #fff;
+    text-shadow: #111 1px 0px 2px;
+    width: 240px;
+}
+
+#menu .tab .icon {
+    margin-top: -5px;
+    height: 30px;
+    width: 0px;
+    background: url("../img/icon.jpeg");
+    background-size: 30px 30px;
+    display: block;
+    background-repeat: no-repeat;
+    float: left;
+    margin-right: 10px;
+
+    transition-property:opacity, weight;
+    transition-duration:1.2s, .5s;
+    opacity:0.5;
+}
+
+#menu .tab:hover .icon {
+    opacity: 1;
+    width: 30px;
 }
 
 #body {
     background-image: url('../img/sprout.jpg');
     background-repeat: no-repeat;
-    background-position: center right;
-    background-color: #000;
+    background-position: top center;
     background-size: 100%;
+    padding: 10px;
 }
 
 
@@ -98,10 +113,10 @@
     width: 600px;
     height: 800px;
     margin: 0 auto;
-    background-color: #000;
-    border: 22px solid #000;
-    border-radius: 20px;
-    box-shadow: 0 0 0 2px #ccc;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    border: 10px solid transparent;
+    border-radius: 10px;
 }
 
 .side {
