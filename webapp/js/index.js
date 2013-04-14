@@ -35,12 +35,33 @@ $('.tab').click(function(event) {
     };
 
     var gdpData = {
-        "IN": 132.04,
-        "DE": 3300.54,
-        "RU": 1456.87,
-        "US": 14511.05
+        "IN": 5,
+        "DE": 5,
+        "RU": 5,
+        "US": 5
     };
     <!-- end of Test data -->
+
+    <!-- Hardcoded country coordinates -->
+    var countryCoordinates = {
+        "DE": {
+            "lat": "50N",
+            "long": "10E"
+        },
+        "RU": {
+            "lat": "60N",
+            "long": "97.5E"
+        },
+        "US": {
+            "lat": "40N",
+            "long": "105W"
+        },
+        "IN": {
+            "lat":"22N",
+            "long":"80E"
+        }
+    };
+    <!-- end of Hardcoded country coordinates -->
 
     var map;
     var categoryNames = {
@@ -49,9 +70,11 @@ $('.tab').click(function(event) {
         "sealevel": "Sea Level"
     }
     var selectedCountries = [];
+    var selectedCoordinates = {};
     var defaultCategory = "warming";
     var MAX_COUNTRY_SELECTION = 3;
     var selectedCategory = defaultCategory;
+    var lastCountryClicked = '';
 
     <!-- Creating page flip effect object -->
     var effect = kendo.fx("#container").flipHorizontal($("#face"), $("#back")).duration(300),
@@ -118,7 +141,8 @@ $('.tab').click(function(event) {
             },
 
             onRegionClick: function(event, code) {
-                console.log(' Clicked on country: '+code);
+                //console.log(' Clicked on country: '+code+', coordinates: '+JSON.stringify(countryCoordinates[code], null, "\t"));
+                lastCountryClicked = code;      // used to set the countryCoordinates values
                 addRemoveCountryToChart(code);
             }
         });
@@ -128,7 +152,8 @@ $('.tab').click(function(event) {
                 targetCls = $(e.target).attr('class');
 
             if (latLng && (!targetCls || (targetCls && $(e.target).attr('class').indexOf('jvectormap-marker') === -1))) {
-                console.log(' Clicked at lat: '+latLng.lat+ ' long: '+latLng.lng);
+                //console.log(' Clicked at lat: '+latLng.lat+ ' long: '+latLng.lng);
+                setSelectedCoordinates(latLng);
             }
         });
     }
@@ -149,7 +174,7 @@ $('.tab').click(function(event) {
             },
             valueAxis: {
                 labels: {
-                    format: "{0}%"
+                    format: "{0}"
                 },
                 line: {
                     visible: false
@@ -161,8 +186,40 @@ $('.tab').click(function(event) {
                 majorGridLines: {
                     visible: false
                 }
+            },
+            tooltip: {
+                visible: true,
+                format: "{0}",
+                template: "#= series.name #: #= value #"
             }
         });
+    };
+
+    // Generate acceptable coordinates for the REST from precise coordinates
+    function setSelectedCoordinates(latLng) {
+        //latLng.lat+ ' long: '+latLng.lng
+        var lat = Math.round(latLng.lat);
+        if (lat%2 == 1) {
+            lat++;
+        }
+        if (lat > 0) {
+            lat = lat + 'N';
+        } else {
+            lat = Math.abs(lat) + 'S';
+        }
+        var long = Math.round(latLng.lng);
+        if (long%2.5 != 0) {
+            long = long - long%2.5;
+        }
+        if (long > 0) {
+            long = long + 'E';
+        } else {
+            long = Math.abs(long) + 'W';
+        }
+        selectedCoordinates.lat = lat;
+        selectedCoordinates.long = long;
+        countryCoordinates[lastCountryClicked] = selectedCoordinates;
+        //console.log(' Calculated coordinates: '+JSON.stringify(selectedCoordinates, null, "\t"));
     };
 
 // Adds country code to the chart, or if already added, remove is
@@ -186,7 +243,9 @@ $('.tab').click(function(event) {
         } else {
             selectedCountries = newSelection.slice(1, newSelection.length);
         }
-        updateChart();
+
+        // Update a bit later, so we have time to set formatted coordinate for country
+        setTimeout(function() {updateChart();}, 100);
     }
 
     function resetChart() {
@@ -200,6 +259,7 @@ $('.tab').click(function(event) {
     }
 
     function updateChart() {
+        console.log('Update chart called');
         var chart = $("div.side #chart").data("kendoChart");
 
         // Change Title of the Chart
@@ -208,7 +268,14 @@ $('.tab').click(function(event) {
         // Update chart data
         chart.options.series = [];
         for (i=0; i<selectedCountries.length; i++) {
-            chart.options.series.push(globalWarmingData[selectedCountries[i]])
+            // TODO: call REST for real data
+            console.log(' TODO: call REST for real data, for country '+selectedCountries[i]);
+            console.log('       coordinates are: '+JSON.stringify(countryCoordinates[selectedCountries[i]], null, "\t"));
+
+            // TODO: remove this, once we have real data
+            if (globalWarmingData[selectedCountries[i]] !== undefined) {
+                chart.options.series.push(globalWarmingData[selectedCountries[i]]);
+            }
         }
         chart.refresh();
     }
