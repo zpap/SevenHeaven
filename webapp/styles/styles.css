@@ -183,8 +183,17 @@
 }
 
 .side p img.small {
-    width: 50px;
+    height: 80px;
 }
+
+.side p a {
+    color: lightblue;
+}
+
+.side p b {
+    color: black;
+}
+
 
 .inner_content {
     padding: 10px;

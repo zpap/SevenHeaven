@@ -5,7 +5,7 @@
     <ignored path="webapp.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/index.html" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365918926794" ignored="false" />
-    <file path="/styles.css" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365918797585" ignored="false" />
+    <file path="/styles.css" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365919297662" ignored="false" />
     <file path="/map.css" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365905461562" ignored="false" />
     <file path="/index.js" changelist="880321f0-fa62-4b7e-a5ef-464df2160ac6" time="1365908190068" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,10 +68,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="155" selection-start="2571" selection-end="2571" vertical-scroll-proportion="0.49940404">
+            <state line="88" column="162" selection-start="3568" selection-end="3568" vertical-scroll-proportion="-13.083333">
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -80,10 +80,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="styles.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="styles.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/styles/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="184" column="0" selection-start="3185" selection-end="3223" vertical-scroll-proportion="-9.745455">
+            <state line="173" column="75" selection-start="3076" selection-end="3076" vertical-scroll-proportion="0.45188794">
               <folding />
             </state>
           </provider>
@@ -120,8 +120,8 @@
         <option value="$PROJECT_DIR$/styles/map.css" />
         <option value="$PROJECT_DIR$/js/index.js" />
         <option value="$PROJECT_DIR$/map.html" />
-        <option value="$PROJECT_DIR$/styles/styles.css" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/styles/styles.css" />
       </list>
     </option>
   </component>
@@ -461,20 +461,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/styles/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="0" selection-start="3185" selection-end="3223" vertical-scroll-proportion="-9.745455">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="155" selection-start="2571" selection-end="2571" vertical-scroll-proportion="0.49940404">
+        <state line="88" column="162" selection-start="3568" selection-end="3568" vertical-scroll-proportion="-13.083333">
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="173" column="75" selection-start="3076" selection-end="3076" vertical-scroll-proportion="0.45188794">
+          <folding />
         </state>
       </provider>
     </entry>
