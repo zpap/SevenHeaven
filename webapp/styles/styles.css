@@ -35,6 +35,7 @@
 
 #quote {
     background-image: url('../img/swimmingpolarbear.jpg');
+    background-size: 100% 150px;
     height: 150px;
     width: 70%;
     position: absolute;
@@ -69,13 +70,20 @@
     opacity:0.8;
 }
 
-#menu .tab:hover
-{
+#menu .tab:hover{
     opacity:1;
     background:green;
     color: #fff;
     text-shadow: #111 1px 0px 2px;
-    width: 240px;
+    width: 250px;
+}
+
+#menu .tab.active {
+    opacity:1;
+    background:#fff;
+    color: #000;
+    text-shadow: #ddd 1px 0px 2px;
+    width: 250px;
 }
 
 #menu .tab .icon {
@@ -94,16 +102,15 @@
     opacity:0.5;
 }
 
-#menu .tab:hover .icon {
+#menu .tab:hover .icon,  #menu .tab.active .icon {
     opacity: 1;
     width: 30px;
 }
 
 #body {
-    background-image: url('../img/sprout.jpg');
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-size: 100%;
+    background: url('../img/sprout.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #333;
     padding: 10px;
 }
 
