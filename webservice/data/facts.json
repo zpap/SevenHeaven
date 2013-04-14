@@ -1,4 +1,3 @@
-var facts = 
 {
   "data": [
     {
@@ -36,4 +35,4 @@ var facts =
   ],
   "message": "no error",
   "result": "success"
-};
+}

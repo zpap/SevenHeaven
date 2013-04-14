@@ -28,6 +28,8 @@ TipsRepository.prototype.findAll = function () {
 }
 
 // ------------------------------------------- Facts  -----------------------------
+
+var factsjson = require("./data/facts.json");
 /*
 function Fact (title, description) {
     this.title = title;
@@ -82,7 +84,7 @@ CarbonFootprintRepository.prototype.findAll = function() {
 
 var carbonFootprintRepository = new CarbonFootprintRepository();
 var tipsRepository = new TipsRepository();
-var factsRepository = new FactsRepository();
+//var factsRepository = new FactsRepository();
 
 app.use(express.logger());
 
@@ -125,7 +127,7 @@ app.get('/facts', function(request, response) {
     } catch (exception) {
         response.send(404);
     }         */
-    response.render('data/facts.json')
+    response.json(factsjson);
 });
 
 
