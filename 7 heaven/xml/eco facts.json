@@ -1,0 +1,39 @@
+var facts = 
+{
+  "data": [
+    {
+      "title": "Some title for the fact here",
+      "description": "By recycling half of your waste, you reduce the amount of carbon dioxide in the air by 2,400 pounds annually"
+    },
+    {
+      "title": "Some title for the fact here",
+      "description": "CFL bulbs last 10 times longer than incandescent bulbs, use two-thirds less energy and give off 70 percent less heat"
+    },
+    {
+      "title": "Some title for the fact here",
+      "description": "By 2020, entertainment, computers and gadgets will account for almost half of electricity used in the home"
+    },
+    {
+      "title": "Some title for the fact here",
+      "description": "All of our ovens, microwaves, kettles and other kitchen cooking appliances use up enough electricity in a year to run the UK's street lighting for six years"
+    },
+    {
+      "title": "Some title for the fact here",
+      "description": "The world’s oceans are believed to absorb about half of the total carbon emissions from human activities and those from cows"
+    },
+    {
+      "title": "Some title for the fact here",
+      "description": " <fact>On earth, we have natural regulator of climate and weather, the forests. Cutting down of forests mean the weather is going to be unregulated which is dangerous</fact>"
+    },
+    {
+      "title": "Some title for the fact here",
+      "description": " <fact>The world’s tropical forests absorb the equivalent of the total carbon dioxide emissions from the United States</fact>"
+    },
+    {
+      "title": "Some title for the fact here",
+      "description": " <fact>Vietnam’s rice bowl threatened by rising seas: climate change is turning rivers of Mekong Delta salty, spelling disaster for millions of poor farmers</fact>"
+    }
+  ],
+  "message": "no error",
+  "result": "success"
+};
