@@ -25,6 +25,9 @@
     <!-- Index script -->
     <script src="js/index.js"></script>
 
+    <!-- Facts script -->
+    <script src="js/facts.js"></script>
+
 
     <!-- Index style -->
     <link rel="stylesheet" href="styles/styles.css" type="text/css" media="screen"/>
@@ -68,7 +71,7 @@
             <!-- Map -->
             <div id="world-map" style="width: 600px; height: 400px"></div>
             <!-- (Toogle) buttons -->
-            <div id="buttonsArea">
+            <div id="buttonsArea" style="width:100%; padding: 0 70px;">
 
                 <input type="radio" id="warmingOpt" name="categorySelector" value="warming" checked>Global Warming
                 <input type="radio" id="carbonOpt" name="categorySelector" value="carbon">Carbon Footprint
@@ -85,6 +88,14 @@
         <div id="factsPage" class="box">
             <!-- Content for the Facts page -->
             <h1>Facts</h1>
+            <div id="factsListView"></div>
+
+                <script type="text/x-kendo-tmpl" id="factsTemplate">
+                    <div class="fact">
+                        <h2>#:title#</h2>
+                        <p>#:description#</p>
+                    </div>
+                </script>
         </div>
 
         <div id="tipsPage" class="box">

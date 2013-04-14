@@ -178,6 +178,11 @@
     text-shadow: #fff 1px 0px 2px;
 }
 
+.side h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
 .side p {
     color: #fff;
 }
@@ -204,3 +209,4 @@
     right: 0;
     background-color: #8dc454;    */
 }
+

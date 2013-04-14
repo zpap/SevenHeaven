@@ -5,49 +5,11 @@ app.use(express.static(__dirname + '/../webapp'));
 
 
 
-// ------------------------------------------- Tips  -----------------------------
+// ----------------------------- Links to Quotes, Tips and Facts json files  -----------------------------
 
-function Tip (title, description) {
-    this.title = title;
-    this.description = description;
-}
-
-function TipsRepository() {}
-
-TipsRepository.prototype.findAll = function () {
-
-    var results = new Array (30);
-
-    for (i = 0; i < 30; i++) {
-        var title = "Some tip title here";
-        var description = "Some description about the tip here"
-        results[i] = new Tip(title, description);
-    }
-
-    return results;
-}
-
-// ------------------------------------------- Facts  -----------------------------
-
+var quotesjson = require("./data/quotes.json");
+var tipsjson = require("./data/tips.json");
 var factsjson = require("./data/facts.json");
-/*
-function Fact (title, description) {
-    this.title = title;
-    this.description = description;
-}
-function FactsRepository() {}
-FactsRepository.prototype.findAll = function () {
-
-    var results = new Array (30);
-
-    for (i = 0; i < 30; i++) {
-        var title = "Some title for the fact here";
-        var description = "Some description for the fact here"
-        results[i] = new Fact(title, description);
-    }
-
-    return results;
-}      */
 
 // ------------------------------------ Carbon Footprint -------------------------
 
@@ -83,8 +45,6 @@ CarbonFootprintRepository.prototype.findAll = function() {
 // ------------------------------------------------------------------------------
 
 var carbonFootprintRepository = new CarbonFootprintRepository();
-var tipsRepository = new TipsRepository();
-//var factsRepository = new FactsRepository();
 
 app.use(express.logger());
 
@@ -94,10 +54,6 @@ app.configure(function() {
 
 // --------------------------------------- REST -----------------------------------
 
-//app.get('/', function(request, response) {
-//    response.send('Welcome in Seven Heaven');
-//});
-
 app.get('/carbonFootprints', function(request, response) {
     try {
         response.json(carbonFootprintRepository.findAll());
@@ -106,27 +62,15 @@ app.get('/carbonFootprints', function(request, response) {
     }
 });
 
-app.get('/tips', function(request, response) {
-    try {
+app.get('/quotes', function(request, response) {
+    response.json(quotesjson);
+});
 
-        var tips = tipsRepository.findAll();
-        var errorMessage = "no error";
-        var result = "success";
-        response.json({data: tips, message: errorMessage, result: result});
-    } catch (exception) {
-        response.send(404);
-    }
+app.get('/tips', function(request, response) {
+    response.json(tipsjson);
 });
 
 app.get('/facts', function(request, response) {
-    /*try {
-        var facts = factsRepository.findAll();
-        var errorMessage = "no error";
-        var result = "success";
-        response.json({data: facts, message: errorMessage, result: result});
-    } catch (exception) {
-        response.send(404);
-    }         */
     response.json(factsjson);
 });
 
