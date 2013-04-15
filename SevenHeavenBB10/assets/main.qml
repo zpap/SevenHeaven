@@ -47,6 +47,6 @@ TabbedPane {
     onCreationCompleted: {
         // enable layout to adapt to the device rotation
         // don't forget to enable screen rotation in bar-bescriptor.xml (Application->Orientation->Auto-orient)
-        OrientationSupport.supportedDisplayOrientation = SupportedDisplayOrientation.All;
+        //OrientationSupport.supportedDisplayOrientation = SupportedDisplayOrientation.All;
     }
 }

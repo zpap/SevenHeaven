@@ -7,7 +7,7 @@ Page {
         id: homeTitleBar
     }
     Container {
-        background: Color.create("#5574F2")
+        background: bgHome.imagePaint
         ScrollView {
             Container {
                 topPadding: 24
@@ -34,6 +34,10 @@ Page {
             ImagePaintDefinition {
                 id: moduleBottom
                 imageSource: "asset:///images/module-bottom.png"
+            },
+            ImagePaintDefinition {
+                id: bgHome
+                imageSource: "asset:///images/sprout.jpg"
             },
             TextStyleDefinition {
                 id: cardTitle

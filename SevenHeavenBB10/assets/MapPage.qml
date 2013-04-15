@@ -17,6 +17,7 @@ Page {
         Container {
             WebView {
                 id: mapWebView
+                preferredWidth: 768
                 url: "http://eco-bodhi.herokuapp.com/map.html"
                 settings.zoomToFitEnabled: true
             }
