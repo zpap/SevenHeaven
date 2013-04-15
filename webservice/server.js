@@ -1,51 +1,59 @@
 var express = require("express");
 var app = express();
 
+// ----------------------------------------- XML --------------------------------
+
+var fs = require('fs'),
+xml2js = require('xml2js');
+jquery = require('jquery');
+
+var parser = new xml2js.Parser({ explicitArray: true, attrkey: "SHAttr", charkey: "SHCharKey" });
+// storing data based on xml
+var availableDates = new Array();
+var longitudes;
+var latitudeList = new Array();
+
+console.log("Parsing CO2.xml ...");
+
+// parsing the xml
+fs.readFile('CO2.xml', function(err, data) {
+    parser.parseString(data, function (err, result) {
+
+        var jsonString = JSON.stringify(result);
+        var json_parsed = jquery.parseJSON(jsonString);
+        var root = json_parsed.Eco_Bodhi;
+        longitudes = root.Longitudes[0].split(",");
+        var dates = root.Date;
+
+        for (i = 0; i < dates.length; i++) {
+            var dateData = dates[i];
+            // storing latitudes list for every date, and updating date list
+            latitudeList[i] = dateData.Latitude;
+            var date = dateData.SHAttr.value;
+            availableDates[i] = date;
+        }
+
+        console.log("Total dates: " + dates.length + " parsed sucessfully!");
+
+        // Use middleware to parse POST data and use custom HTTP methods
+        app.use(express.bodyParser());
+        app.use(express.methodOverride());
+
+        var port = process.env.PORT || 5000;
+
+        app.listen(port, function() {
+            console.log("Starting Service. Listening on " + port + " ...");
+        });
+    });
+});
+
 app.use(express.static(__dirname + '/../webapp'));
 
+// ----------------------------- Links to Quotes, Tips and Facts json files  -----------------------------
 
-
-// ------------------------------------------- Tips  -----------------------------
-
-function Tip (title, description) {
-    this.title = title;
-    this.description = description;
-}
-
-function TipsRepository() {}
-
-TipsRepository.prototype.findAll = function () {
-
-    var results = new Array (30);
-
-    for (i = 0; i < 30; i++) {
-        var title = "Some tip title here";
-        var description = "Some description about the tip here"
-        results[i] = new Tip(title, description);
-    }
-
-    return results;
-}
-
-// ------------------------------------------- Facts  -----------------------------
-
-function Fact (title, description) {
-    this.title = title;
-    this.description = description;
-}
-function FactsRepository() {}
-FactsRepository.prototype.findAll = function () {
-
-    var results = new Array (30);
-
-    for (i = 0; i < 30; i++) {
-        var title = "Some title for the fact here";
-        var description = "Some description for the fact here"
-        results[i] = new Fact(title, description);
-    }
-
-    return results;
-}
+var quotesjson = require("./data/quotes.json");
+var tipsjson = require("./data/tips.json");
+var factsjson = require("./data/facts.json");
 
 // ------------------------------------ Carbon Footprint -------------------------
 
@@ -78,11 +86,43 @@ CarbonFootprintRepository.prototype.findAll = function() {
     return results;
 }
 
+CarbonFootprintRepository.prototype.carbonValues = function(long, lat) {
+
+    // finding latitude index
+
+    var indexLong = longitudes.indexOf(long);
+
+    console.log ("Longitude index requested " + indexLong + " for " + long);
+
+    console.log("Displaying carbon values" + latitudeList.length);
+    var result = new Array();
+
+    for (i = 0; i < latitudeList.length; i++) {
+
+        var latitudes = latitudeList[i];
+
+        for (j = 0; j < latitudes.length; j++) {
+
+            var latitude = latitudes[j].SHCharKey;
+            var latitudeValue = latitudes[j].SHAttr.value;
+
+            if (latitudeValue == lat) {
+
+                var latitudeItems = latitude.split(",");
+
+                var value = latitudeItems[indexLong];
+
+                result[i] = value;
+            }
+        }
+   }
+
+    return result;
+}
+
 // ------------------------------------------------------------------------------
 
 var carbonFootprintRepository = new CarbonFootprintRepository();
-var tipsRepository = new TipsRepository();
-var factsRepository = new FactsRepository();
 
 app.use(express.logger());
 
@@ -92,9 +132,6 @@ app.configure(function() {
 
 // --------------------------------------- REST -----------------------------------
 
-//app.get('/', function(request, response) {
-//    response.send('Welcome in Seven Heaven');
-//});
 
 app.get('/carbonFootprints', function(request, response) {
     try {
@@ -102,45 +139,46 @@ app.get('/carbonFootprints', function(request, response) {
     } catch (exception) {
         response.send(404);
     }
+});
+
+app.get('/quotes', function(request, response) {
+    response.json(quotesjson);
 });
 
 app.get('/tips', function(request, response) {
-    try {
-
-        var tips = tipsRepository.findAll();
-        var errorMessage = "no error";
-        var result = "success";
-        response.json({data: tips, message: errorMessage, result: result});
-    } catch (exception) {
-        response.send(404);
-    }
+    response.json(tipsjson);
 });
 
 app.get('/facts', function(request, response) {
+    response.json(factsjson);
+});
+
+
+app.get('/availableDates', function(request, response) {
     try {
-        var facts = factsRepository.findAll();
+        response.json(availableDates);
+    } catch (exception) {
+        response.send(404);
+    }
+});
+
+app.get('/longitudes', function(request, response) {
+    try {
+
         var errorMessage = "no error";
         var result = "success";
-        response.json({data: facts, message: errorMessage, result: result});
+
+        response.json({data: longitudes, message: errorMessage, result: result});
     } catch (exception) {
         response.send(404);
     }
 });
 
-
-app.get('/carbonFootprints', function(request, response) {
+app.get('/carbonFootprint/:long/:lat', function(request, response) {
+    var long = request.params.long;
+    var lat = request.params.lat;
     try {
-        response.json(carbonFootprintRepository.findAll());
-    } catch (exception) {
-        response.send(404);
-    }
-});
-
-app.get('/carbonFootprint/:x/:y', function(request, response) {
-    var x = request.params.x;
-    var y = request.params.y;
-    try {
-       response.json(carbonFootprintRepository.find(x,y));
+        response.json(carbonFootprintRepository.carbonValues(long,lat));
     } catch (exception) {
         response.send(404);
     }
@@ -148,13 +186,4 @@ app.get('/carbonFootprint/:x/:y', function(request, response) {
 
 // ------------------------------------------------------------------------------
 
-// Use middleware to parse POST data and use custom HTTP methods
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-
-var port = process.env.PORT || 5000;
-
-app.listen(port, function() {
-    console.log("Listening on " + port);
-});
 

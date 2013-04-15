@@ -41,14 +41,10 @@ void QuotesController::load(const QString& file_name)
 
 QVariant QuotesController::getRandomQuote()
 {
-/*
+
 	if (!m_data.isEmpty()) {
 		return m_data.at(qrand() % m_data.size());
 	}
 	return 0;
-*/
-	QVariantMap map;
-	map["quote"] = "\"This is a random quote!\"";
-	map["author"] = "Rob Woods";
-	return map;
+
 }
